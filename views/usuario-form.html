@@ -1,0 +1,20 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+                {{vm.subtitle}} {{vm.editMode}}
+            </div>
+            <div class="card-body">
+                <form ng-submit="vm.grabar(vm.usuario)" novalidate name="vm.usuarioForm">
+                    <formly-form model="vm.usuario" fields="vm.usuarioFields" options="vm.options" novalidate>
+                        <button type="submit" ng-disabled="vm.usuarioForm.$invalid || vm.dataSaving" class="btn btn-primary submit-button"><span ng-show="vm.editMode">Aceptar</span><span ng-show="vm.hide && !vm.editMode">Grabar</span></button>
+                        <button class="btn btn-default" type="button" ng-click="vm.cancelar()" ng-disabled="vm.dataSaving"><span>Cancelar</span></button>
+                        <span ng-show="vm.dataSaving"><i ng-show="vm.dataSaving" class="fa fa-spinner fa-pulse"></i> Aguarde un momento..</span>
+                    </formly-form>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+        

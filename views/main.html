@@ -1,0 +1,94 @@
+<style>
+  .bg-primary {
+    background: #3b5998 !important;
+  }
+
+  .text-primary {
+    color: #3b5998 !important;
+  }
+
+  .bg-danger {
+    background: #d34836 !important;
+  }
+
+  .text-danger {
+    color: #d34836 !important;
+  }
+</style>
+<div ng-show="vm.dataLoading">
+  <i class="fa fa-spinner fa-pulse fa-1x fa-fw"></i>
+<span>Cargando...</span>
+</div>
+<div ng-show="!vm.dataLoading" class="animated fadeIn">
+  <div >
+    <div class="row">
+      <div  class="col-xxs-12 col-md-12 col-lg-8">
+        <div class="card">
+          <div class="card-header  text-white bg-info">
+            <!-- CAPTURAS DE PANTALLAS. (FRONT-END)
+            LOGO 1p OK
+            PALETA DE COLORES 1p OK
+            LOGIN (USERNAME, PASSWORD) 1p OK 
+            REGISTRO (NOMBRE, EMAIL, USERNAME, PASSWORD, +) [1 SOLA VEZ|EN SECUENCIA] 1p OK
+            RESTAURAR CONTRASEÑA (EMAIL) 1p OK 
+            MENU LATERAL IZQUIERDO/PESTAÑAS SUPERIOR/INFERIOR (FUNCIONES, PERFIL, CONFIGURACION) 1p OK 
+            PAGINA PRINCIPAL (CARA) - CREATIVIDAD 1p OK
+            
+            CASOS DE USOS MAESTROS 5p (MINIMO 3 - MAXIMO 5)
+            CASOS DE USOS OPERACIONES 10p (MINIMO 2 - MAXIMO 3) -->
+         <h1 class="text-center">MARZO</h1>
+        </div>
+<!--          
+          <div class="card-body  clearfix">
+            <canvas id="myChart" width="800" height="900"></canvas>
+          </div> -->
+        </div>
+      </div>
+      <div  class="col-xxs-12 col-md-12 col-lg-8">
+        <div class="card">
+          <div class="card-header  text-white bg-info">
+            <i class="fa fa-align-justify"></i> Gastos
+            <button type="button"  ui-sref="app.transaccionRegistrar" class="btn btn-minimize  btn-light float-right"
+                uib-popover="Registrar nuevo" popover-trigger="'mouseenter'" popover-placement="auto left">
+                <i class="fa fa-plus" aria-hidden="true"></i> Nuevo Gasto
+            </button>
+
+        </div>
+         
+          <div class="card-body  clearfix">
+            <table class="table table-hover table-sm table-excel table-striped">
+              <thead>
+                  <tr>
+                      <th> Fecha</th>
+                      <th> Categoria</th>
+                      <th> Monto</th>
+                      <!-- <th> Monto</th> -->
+                  </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="c in vm.transacciones">
+                  <td text-align="center" >
+                      <a class="text-info" ui-sref="app.transaccionEditar({ id: c.transaccionId })" >{{c.transaccionFecha | date:'dd/MM/yyyy'}}</a>
+                  </td>
+                  <td>{{c.categoriaDenominacion}}</td>
+                  <td>{{c.transaccionMonto | number:0}}</td>
+                  <!-- <td>
+                      <button ng-click="vm.eliminar(c.transaccionId)" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                  </td> -->
+              </tr>
+                
+              </tbody>
+            
+          </table>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+</div>

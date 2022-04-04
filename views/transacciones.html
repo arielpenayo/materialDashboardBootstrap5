@@ -1,0 +1,54 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Transacciones
+                   
+                    <div class="card-actions">
+                        <a style="width: 80px;" role="button"
+                            ui-sref="app.transaccionRegistrar"
+                            class="btn btn-minimize btn-light bg-transparent float-right" uib-popover="Registrar nuevo"
+                            popover-trigger="'mouseenter'" popover-placement="auto left">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Nuevo
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body" style="overflow-x:auto;">
+                    <table class="table table-hover table-sm table-excel table-striped">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Categoría</th>
+                                <th>Monto</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-if="!vm.transacciones.length && !vm.dataLoading">
+                                <td colspan="3">Sin registros</td>
+                            </tr>
+                            <tr ng-if="vm.dataLoading">
+                                <td colspan="3">
+                                    <span><i class="fa fa-spinner fa-pulse fa-fw"></i></i>Cargando...</span>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="c in vm.transacciones">
+                                <td text-align="center" >
+                                    <a class="text-info" ui-sref="app.transaccionEditar({ id: c.transaccionId })" >{{c.transaccionFecha | date:'dd/MM/yyyy'}}</a>
+                                </td>
+                                <td>{{c.categoriaDenominacion}}</td>
+                                <td>{{c.transaccionMonto | number}}</td>
+                                <td>
+                                    <button ng-click="vm.eliminar(c.transaccionId)" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                                </td>
+                                
+                               
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

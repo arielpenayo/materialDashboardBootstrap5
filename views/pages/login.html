@@ -1,0 +1,39 @@
+<div class="app flex-row align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card-group">
+          <div class="card p-3 card-login">
+            <div class="card-body">
+              <form class="form-signin" ng-submit="vm.login(vm.user)" novalidate name="vm.userForm">
+                
+                <h1 class="granartis-a text-center font15x"></h1>
+                <div class="row justify-content-center">
+                  <img class="img-fluid" src="img/logo-completo.png"  id="icon" alt="User Icon"/>
+                </div>
+                <!-- <h3>Login</h3> -->
+                <formly-form model="vm.user" fields="vm.userFields" novalidate>
+                </formly-form>
+               
+                
+                <button class="btn btn-primary btn-block" type="submit" ng-disabled="vm.userForm.$invalid"id="btn-signup">Iniciar sesión</button>
+                <!-- <button type="button" class="btn btn-link px-0">Olvidó su contraseña?</button> -->
+                <!-- <div style="margin-top: 20px;">
+                    <strong><a ui-sref="usuario-restablecer">Restablecer contraseña</a></strong>
+                </div> -->
+                <button ng-click="vm.goToRegister()" class="btn btn-success btn-block" type="button" id="btn-signup"><i class="fa fa-user-plus"></i>  Crear una cuenta</button>
+                <br>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group">
+                     <a href="#forgot" data-toggle="modal"> Olvido su contraseña? </a>
+                  </div>
+               </div>
+                
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Usuarios
+                    <!-- <a ng-if="vm.canD('usuario-registrar')" ui-sref="app.maestros.usuarioRegistrar" class="btn-sm btn-link float-right">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Nuevo
+                        </a> -->
+                    <button type="button" ng-if="vm.canD('usuario-registrar')" ui-sref="app.maestros.usuarioRegistrar"
+                        class="btn btn-minimize float-right" uib-popover="Registrar nuevo"
+                        popover-trigger="'mouseenter'" popover-placement="auto left">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Nuevo
+                    </button>
+                </div>
+                <div class="card-body" style="overflow-x: auto;">
+                    <table class="table table-hover table-sm table-excel table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre de usuario</th>
+                                <th>Email</th>
+                                <th>Nombre y apellido</th>
+                                <th>Rol</th>
+                                <th>Creado por</th>
+                                <th>Estado</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-if="!vm.usuarios.length && !vm.dataLoading">
+                                <td colspan="8">Sin registros</td>
+                            </tr>
+                            <tr ng-if="vm.dataLoading">
+                                <td colspan="8">
+                                    <span><i class="fa fa-spinner fa-pulse fa-fw"></i></i>Cargando..</span>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="u in vm.usuarios">
+                                <td>{{u.appuserId}}</td>
+                                <td>{{u.appuserLogin}}</td>
+                                <td>{{u.appuserEmail}}</td>
+                                <td>{{u.appuserNombre}}</td>
+                                <td>{{u.appuserRolDenominacion}}</td>
+                                <td>{{u.appuserCreadoPorNombre}}</td>
+                                <td><span class="badge"
+                                        ng-class="u.appuserEstado == 1? 'badge-success' : u.appuserEstado == 2 ? 'badge-warning' : 'badge-danger'">{{(u.appuserEstado
+                                        == 1 ? 'ACTIVADO' : u.appuserEstado == 2 ? 'BORRADOR': 'DESACTIVADO')}}</span>
+                                </td>
+                                <!-- <td>
+                                    <div class="btn-group" uib-dropdown is-open="status.isopen">
+                                        <button id="single-button" type="button" class="btn btn-sm btn-secondary"
+                                            uib-dropdown-toggle ng-disabled="disabled">
+                                            Acciones
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu"
+                                            aria-labelledby="single-button">
+                                            <li ng-if="(u.appuserEstado != 0 ) && vm.canD('usuario-cambiar-rol')"><a
+                                                    ui-sref="app.maestros.usuarioEditar({ id: u.appuserId })"
+                                                    style="margin-left: 10px; margin-right: 10px">Cambiar rol</a></li>
+                                            <li ng-if="u.appuserEstado == 2 && vm.canD('usuario-activar')"><a href
+                                                    ng-click="vm.cambiarEstado(u.appuserId, 'aprobar')"
+                                                    style="margin-left: 10px; margin-right: 10px;">Activar</a></li>
+                                            <li ng-if="u.appuserEstado != 0 && vm.canD('usuario-desactivar')"><a href
+                                                    ng-click="vm.cambiarEstado(u.appuserId, 'anular')"
+                                                    style="margin-left: 10px; margin-right: 10px">Desactivar</a></li>
+                                        </ul>
+                                    </div>
+                                </td> -->
+                                <td nowrap class="text-center">
+                                    <div class="btn-group">
+                                        <!-- Activar -->
+                                        <button class="btn btn-default" ng-if="vm.canD('usuario-activar')"
+                                            ng-disabled="u.appuserEstado == 1"
+                                            ng-click="vm.cambiarEstado(u.appuserId, 'activar')"
+                                            popover-append-to-body="true" uib-popover="Activar"
+                                            popover-trigger="'mouseenter'" popover-placement="top">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                        </button>
+                                        <!-- Desactivar -->
+                                        <button class="btn btn-default" ng-if="vm.canD('usuario-desactivar')"
+                                            ng-disabled="u.appuserEstado != 1"
+                                            ng-click="vm.cambiarEstado(u.appuserId, 'desactivar')"
+                                            popover-append-to-body="true" uib-popover="Activar"
+                                            popover-trigger="'mouseenter'" popover-placement="top">
+                                            <i class="fa fa-ban" aria-hidden="true"></i>
+                                        </button>
+                                        <!-- Editar -->
+                                        <button class="btn btn-default" ng-if="vm.canD('usuario-cambiar-rol')"
+                                            ng-disabled="u.appuserEstado == 0"
+                                            ng-click="vm.goTo('app.maestros.usuarioEditar' , u.appuserId)"
+                                            popover-append-to-body="true" uib-popover="Editar"
+                                            popover-trigger="'mouseenter'" popover-placement="top">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

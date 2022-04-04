@@ -1,0 +1,50 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Categoías
+                   
+                    <div class="card-actions">
+                        <a style="width: 80px;" role="button"
+                            ui-sref="app.maestros.categoriaRegistrar"
+                            class="btn btn-minimize btn-light bg-transparent float-right" uib-popover="Registrar nuevo"
+                            popover-trigger="'mouseenter'" popover-placement="auto left">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Nuevo
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body" style="overflow-x:auto;">
+                    <table class="table table-hover table-sm table-excel table-striped">
+                        <thead>
+                            <tr>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-if="!vm.categorias.length && !vm.dataLoading">
+                                <td colspan="2">Sin registros</td>
+                            </tr>
+                            <tr ng-if="vm.dataLoading">
+                                <td colspan="2">
+                                    <span><i class="fa fa-spinner fa-pulse fa-fw"></i></i>Cargando...</span>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="c in vm.categorias">
+                                <td text-align="center" >
+                                    <a class="text-info" ui-sref="app.maestros.categoriaEditar({ id: c.categoriaId })" >{{c.categoriaDenominacion}}</a>
+                                </td>
+                                <td>
+                                    <button ng-click="vm.eliminar(c.categoriaId)" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                                </td>
+                                
+                               
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

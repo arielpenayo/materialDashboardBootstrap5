@@ -1,0 +1,10 @@
+<ui-select data-ng-model="model[options.key]" data-required="{{to.required}}" data-disabled="{{formState.readOnly==true ? '1' : ''}}" theme="bootstrap">
+      
+    <ui-select-match placeholder="{{to.placeholder}}" data-allow-clear="!formState.readOnly">{{$select.selected[to.labelProp]}}</ui-select-match>
+    
+    <ui-select-choices data-repeat="option[to.valueProp] as option in to.options | filter: $select.search">
+      
+      <div ng-bind-html="option[to.labelProp] | highlight: $select.search"></div>
+      
+    </ui-select-choices>
+</ui-select>

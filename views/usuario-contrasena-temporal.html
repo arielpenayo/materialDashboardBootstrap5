@@ -1,0 +1,17 @@
+<div class="container">
+    <br/>
+    <form class="form-signin" ng-submit="vm.actualizarContrasena(vm.user)" novalidate name="vm.userForm">
+
+        <!-- <h1 class="granartis-a text-center font15x"></h1> -->
+        <div>
+            <h1>Ingrese nueva contraseña</h1>
+        </div>
+        <formly-form model="vm.user" fields="vm.userFields" novalidate>
+        </formly-form>
+
+        <button class="btn btn-primary btn-block" type="submit" ng-disabled="vm.userForm.$invalid">Cambiar contraseña</button>
+
+    </form>
+    
+
+</div>

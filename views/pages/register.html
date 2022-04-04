@@ -1,0 +1,33 @@
+<div class="app flex-row align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card mx-4">
+          <div class="card-body p-4">
+            <h1 class="granartis-a text-center font15x"></h1>
+            <div class="row justify-content-center">
+              <img class="img-fluid" src="img/logo-completo.png"  id="icon" alt="User Icon"/>
+            </div>
+            <h1 class="text-center" >Registrarse</h1>
+            <!-- <p class="text-muted">Crea tú cuenta</p> -->
+            <form class="form-signin" ng-submit="vm.registrar(vm.user)" novalidate name="vm.userForm">
+              
+              <formly-form model="vm.user" fields="vm.userFields" novalidate>
+              </formly-form>
+              
+              <button type="submit" class="btn btn-block btn-success">Crear Cuenta</button>
+              <!-- <button class="btn btn-primary mb-3" type="submit" ng-disabled="vm.userForm.$invalid">Iniciar sesión</button> -->
+              
+          </form>
+
+          </div>
+          <div class="card-footer p-4">
+            <div class="row">
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

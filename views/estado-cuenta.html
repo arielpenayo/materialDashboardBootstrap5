@@ -1,0 +1,129 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Estado de Cuenta
+                    <div class="card-actions">
+                        <button style="width: 50px;" type="button" ng-click="vm.impresion(vm.estadoCuenta,vm.filtro)"
+                        ng-disabled="!vm.estadoCuenta.length ||vm.filtroForm.$invalid" class="btn btn-info" uib-popover="Imprimir"
+                            popover-trigger="'mouseenter'" popover-placement="auto left">
+                            <i class="fa fa-print"></i></button>
+                    </div>
+                    
+                </div>
+                <div class="card-body">
+                    <div class="row" ng-if="vm.estadoCuenta.length">
+                        <div class="col-md-10">
+                        <div class="card">
+                              <div class="card-header">
+                                <h4 class="card-title"><strong>{{vm.cliente.clienteRazonSocial}} </strong></h4>
+                              </div>
+                              <div class="card-body">
+                                   <h5> <span> Documento:</strong> {{vm.cliente.clienteDoc}} 
+                                    <strong>Ruc:</strong> {{vm.cliente.clienteRuc}}
+                                    <strong>Teléfono:</strong> {{vm.cliente.clienteTelefono}}
+                                    <strong>Direccion:</strong> {{vm.cliente.clienteDireccion}}
+                                    <strong>Saldo Actual: </strong>{{vm.saldoActual | number:0}}
+                                    <!-- <strong>Saldo Inicial: </strong>{{vm.saldoInicial | number:0}} -->
+                                    <strong>Terrenos:</strong> {{vm.cantidadTerrenos | number}}
+                                    <strong>Tamaño:</strong> {{vm.cantidadMetrosCuadrados | number:2}} m²
+                                    </span></h5>
+                                    
+                              </div>
+                             
+                        </div>
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-10">
+                            <a ui-sref="app.maestros.expensaRegistrar({ id: vm.cliente.clienteId })" >
+                                <button ng-disabled="vm.dataLoading" class="btn btn-sm  btn-info pull-rigth" type="button">Expensa Individual</button>
+                            </a>
+                            <a>
+                                <button ng-disabled="vm.dataLoading" class="btn btn-sm  btn-info pull-rigth" type="button" ng-click="vm.generarExpensaMensual()">Expensa Mensual</button>
+                            </a>
+                            <a ui-sref="app.maestros.interesMoraRegistrar({ id: vm.cliente.clienteId })">
+                                <button ng-disabled="vm.dataLoading" class="btn btn-sm  btn-info pull-rigth" type="button">Mora Por Interés</button>
+                            </a>
+                            <a ui-sref="app.maestros.saldoAnteriorRegistrar({ id: vm.cliente.clienteId })">
+                                <button ng-disabled="vm.dataLoading" class="btn btn-sm  btn-info pull-rigth" type="button">Saldo Anterior</button>
+                            </a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <div class="card-body">
+                                    <form  name="vm.filtroForm" ng-submit="vm.filtrar(vm.filtro)" class="col-md-12" >
+                                        <div class="form-row d-flex align-items-center">
+                                            
+                                            <div class="form-group col-sm-12 col-md-8">
+                                        
+                                                <formly-form model="vm.filtro" fields="vm.formFields" options="vm.options">
+                                                    <button  class="btn btn-info " type="submit" ng-click="vm.filtrar(vm.filtro)" ng-disabled="vm.filtroForm.$invalid">Buscar</button>
+                                                </formly-form>
+                                                
+                        
+                                            </div>
+                                           
+                                        </div>
+                                    </form>
+                                  </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="card-body" style="overflow-x:auto;">
+                    <table class="table table-hover table-sm table-excel table-striped">
+                        <thead>
+                            <tr>
+                                <th> Movimiento</th>
+                                <th> Observación</th>
+                                <th> Monto</th>
+                                <th> Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-if="!vm.estadoCuenta.length && !vm.dataLoading">
+                                <td colspan="4">Sin Registros</td>
+                            </tr>
+                            <tr ng-if="vm.dataLoading">
+                                <td colspan="4">
+                                    <span><i class="fa fa-circle-notch fa-spin"></i> Cargando..</span>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="d in vm.estadoCuenta | orderBy: '-movimientoFecha'">
+                                <td >
+                                    <span style=" white-space: nowrap;">{{d.tipoMovimiento}} -
+                                        {{d.movimientoFecha | date: 'dd/MM/yyyy' }}</span> <br>
+                                    <span ng-if="d.terrenoId"> Terreno: {{d.terrenoId }} </span> 
+                                </td>
+                                <td>{{d.movimientoObservacion}}</td>
+                                <td class="text-right">{{d.movimientoMonto | number:0}}</td>
+                                <td ><button ng-click="vm.eliminar(d.movimientoId)" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                            <tr ng-if="vm.saldoInicial != 0">
+                                <td> Saldo Inicial del <span ng-if="vm.filtro.fechaDesde">{{vm.filtro.fechaDesde | date: 'dd/MM/yyyy' }} </span>:</td>
+                                <td></td>
+                                <td class="text-right">{{vm.saldoInicial| number:0}}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right"><span ng-if="vm.movimientoTotal > 0">Total: <strong>{{vm.movimientoTotal | number:0}}</strong></span> </td>
+                                <td></td>
+                              </tr>
+                        </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

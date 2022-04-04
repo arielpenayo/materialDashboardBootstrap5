@@ -1,0 +1,69 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Movimientos
+
+                </div>
+                <div class="card-body" style="overflow-x:auto;">
+                    <form  name="vm.filtroForm" ng-submit="vm.filtrar(vm.filtro)" class="col-md-12">
+                        <div class="form-row d-flex align-items-center">
+                            <div class="form-group col-sm-12 col-md-6">
+                                <h5><label for="ml">Observación</label>  </h5> 
+                                <input id="ml" type="text" class="form-control" ng-model="searchinput">
+                                <formly-form model="vm.filtro" fields="vm.formFields" options="vm.options">
+                                </formly-form>
+                                <br>
+                                <button  class="btn btn-success  float-right" type="button" ng-click="vm.exportData(vm.filtro)" ng-disabled="!vm.movimientos.length"><i class="fa fa-file-excel-o" aria-hidden="true"></i></button>
+                                <button  class="btn btn-info float-right" type="submit" ng-click="vm.filtrar(vm.filtro)" ng-disabled="vm.filtroForm.$invalid">Buscar</button>
+        
+                            </div>
+                           
+                        </div>
+                    </form>
+    
+                </div>
+                <div class="card-body" style="overflow-x:auto;">
+
+                    <table class="table table-hover table-striped table-sm ">
+                        <thead>
+                            <tr>
+                                <th> Cliente</th>
+                                <th> Observacion</th>
+                                <th> Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-if="!vm.movimientos.length && !vm.dataLoading">
+                                <td colspan="11">Sin Registros</td>
+                            </tr>
+                            <tr ng-if="vm.dataLoading">
+                                <td colspan="11">
+                                    <span><i class="fa fa-circle-notch fa-spin"></i> Cargando..</span>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="d in $parent.movimientosFiltrados = (vm.movimientos | filter:{movimientoObservacion:searchinput})">
+                                <td>{{d.clienteRazonSocial}} <br>
+                                   <strong> Fecha:</strong> {{d.movimientoFecha}} <br>
+                                   <span ng-if="d.terrenoId"><strong> Terreno:</strong> {{d.terrenoId }} </span>
+
+                                </td>
+                                <td >{{d.movimientoObservacion}}</td>
+                                <td class="text-right">{{d.movimientoMonto | number:0}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                
+                                <td></td>
+                                <td></td>
+                                <td class="text-left"><strong> Total: {{ vm.sumarTotal().saldoClientesTotal | number:0}} </strong> </td>
+                              </tr>
+                        </tfoot>
+                    </table>
+                </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,21 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header text-white bg-info">
+                {{vm.subtitle}}
+            </div>
+            <div class="card-body">
+                <form name="vm.categoriaForm" ng-submit="vm.grabar(vm.categoria)">
+                    <formly-form model="vm.categoria" fields="vm.formFields" options="vm.options">
+                        <a ui-sref="app.maestros.categorias">
+                            <button ng-disabled="vm.dataLoading" class="btn btn-secondary pull-right" type="button"><span ng-show="vm.editMode">Volver</span><span ng-show="!vm.editMode">Cancelar</span></button>
+                        </a>
+                        <button  class="btn btn-success pull-right" type="submit" ng-disabled="vm.categoriaForm.$invalid">Grabar</button>
+                    </formly-form>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+        
